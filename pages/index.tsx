@@ -1,23 +1,30 @@
-import React from 'react';
-import Card from '../components/common/Card';
+// pages/index.tsx
 
-const HomePage = () => {
-  const handleBooking = () => {
-    alert('Booking successful!');
-  };
+import Head from 'next/head';
+import { PROPERTYLISTINGSAMPLE } from '@/constants';
+import PropertyCard from '@/components/PropertyCard';
+import HeroSection from '@/components/HeroSection';
+import FilterSection from '@/components/FilterSection';
 
+export default function Home() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Available Listings</h1>
-      <Card
-        title="Cozy Beach House"
-        description="Enjoy your stay at this beautiful beach house."
-        imageUrl="/assets/sample-property.jpg"
-        price={120}
-        onBook={handleBooking}
-      />
-    </div>
-  );
-};
+    <>
+      <Head>
+        <title>Responsive Property Listings</title>
+        <meta name="description" content="Browse properties across Kenya with responsive filtering and layout." />
+      </Head>
 
-export default HomePage;
+      <main className="min-h-screen bg-gray-50 px-4 md:px-12 py-6">
+        <HeroSection />
+
+        <FilterSection />
+
+        <section className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {PROPERTYLISTINGSAMPLE.map((property, index) => (
+            <PropertyCard key={index} {...property} />
+          ))}
+        </section>
+      </main>
+    </>
+  );
+}
